@@ -1,0 +1,21 @@
+# Config com API key
+.sentenciador.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Artefatos de build
+dist/
+build/
+*.spec
+
+# Saída dos exemplos
+exemplos/*.docx
+
+# Arquivos de trabalho (autos reais não devem ir ao git)
+*_limpo.pdf
+*_sentenca.py
+*_sentenca.docx
