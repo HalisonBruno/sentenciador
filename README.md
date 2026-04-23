@@ -1,8 +1,10 @@
+> **[⬇ Baixar o executável (v1.0.0)](https://github.com/HalisonBruno/sentenciador/releases/latest)** — Windows, 100+ MB, não precisa instalar Python
+
 # Sentenciador
 
 > Programa único que integra pré-processamento de PDFs do SAJ, redação
 > assistida pelo Claude e geração de `.docx` forense em um só clique.
-> **[⬇ Baixar o executável (v1.0.0)](https://github.com/HalisonBruno/sentenciador/releases/latest)** — Windows, 100+ MB, não precisa instalar Python
+
 
 ## O que ele faz
 
