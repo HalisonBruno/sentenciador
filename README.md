@@ -1,147 +1,146 @@
-> **[⬇ Baixar o executável (v1.0.0)](https://github.com/HalisonBruno/sentenciador/releases/latest)** — Windows, 100+ MB, não precisa instalar Python
+**[Leia em Português 🇧🇷](README.pt-BR.md)**
+
+> **[⬇ Download the executable (v1.0.0)](https://github.com/HalisonBruno/sentenciador/releases/latest)** — Windows, 100+ MB, no Python install required
 
 # Sentenciador
 
-> Programa único que integra pré-processamento de PDFs do SAJ, redação
-> assistida pelo Claude e geração de `.docx` forense em um só clique.
+> A single desktop program that integrates SAJ court-case PDF pre-processing,
+> AI-assisted drafting via Claude, and generation of court-ready `.docx`
+> rulings — in one click.
 
+## What it does
 
-## O que ele faz
+Drop the court-case PDF into the window and, in a few minutes, you get a
+ready ruling in Word format, styled according to Brazilian legal standards,
+with sections for Report, Reasoning, and Decision. No copy-paste, no
+external editor, no manual conversion.
 
-Você solta o PDF dos autos na janela e, em poucos minutos, recebe uma
-sentença pronta em Word, formatada no padrão forense, com relatório,
-fundamentação e dispositivo. Sem copy-paste, sem editor externo, sem
-conversão manual.
+The program chains three tools into a single flow:
 
-O programa internaliza três ferramentas em um único fluxo:
+1. **PDF pre-processing** — crops the SAJ side watermark, applies OCR to
+   scanned pages (IDs, contracts, property records) and compresses images,
+   reducing file size by up to 70%.
 
-1. **Pré-processamento do PDF** — recorta a tarja lateral do SAJ, aplica
-   OCR nas páginas escaneadas (RGs, contratos, matrículas) e comprime
-   imagens, reduzindo o arquivo em até 70%.
+2. **AI drafting via Claude API** — sends the cleaned PDF as a native
+   document, with a system prompt that encapsulates the judge's writing
+   style and Brazilian legal-drafting conventions.
 
-2. **Redação pela API do Claude** — envia o PDF já limpo como documento
-   nativo, com system prompt que encapsula o estilo do juiz e as regras
-   forenses.
+3. **.docx generation** — converts the structured ruling into a Word
+   document with Times New Roman 12, 2.5cm indent, 1.5 line spacing,
+   italic citations, centered bold headings, and a signature line.
 
-3. **Geração do `.docx`** — converte a sentença estruturada em documento
-   Word com fonte Times New Roman 12, recuo 2,5 cm, espaçamento 1,5,
-   citações em itálico, cabeçalhos centralizados em negrito, fecho com
-   linha de assinatura.
+## Highlights
 
-## Qualidades
+### Full integration — one click, one ruling
 
-### Integração total — um clique, uma sentença
+Input: court-case PDF. Output: `ruling.docx` ready to sign.
+Pre-processing, AI call, Word generation: all automated.
 
-Entrada: PDF dos autos. Saída: `sentenca.docx` pronto para assinar.
-Pré-processamento, chamada à IA, geração do Word: tudo automatizado.
+### Supports the latest Claude models
 
-### Compatível com as versões mais recentes do Claude
+The program lets you pick, via a dropdown in the GUI, any modern Claude
+model available on the Anthropic API:
 
-O programa suporta, via menu dropdown na interface, todas as versões
-modernas do Claude disponíveis na API Anthropic:
+| Model | Strength | Input/Output cost (USD per million tokens) |
+|-------|----------|--------------------------------------------|
+| **Claude Opus 4.7** | Top-tier legal reasoning | 5.00 / 25.00 |
+| **Claude Opus 4.6** | Previous Opus, still excellent | 5.00 / 25.00 |
+| **Claude Sonnet 4.6** | Best quality/cost balance | 3.00 / 15.00 |
+| **Claude Sonnet 4.5** | Previous Sonnet | 3.00 / 15.00 |
 
-| Modelo | Força | Custo input/output (USD por milhão tokens) |
-|--------|-------|--------------------------------------------|
-| **Claude Opus 4.7** | Máxima qualidade em raciocínio jurídico | 5,00 / 25,00 |
-| **Claude Opus 4.6** | Versão anterior do Opus, ainda excelente | 5,00 / 25,00 |
-| **Claude Sonnet 4.6** | Equilíbrio entre qualidade e custo | 3,00 / 15,00 |
-| **Claude Sonnet 4.5** | Versão anterior do Sonnet | 3,00 / 15,00 |
+Switch models on the fly — no restart needed. Use Sonnet for simple
+cases, Opus for complex ones — case by case.
 
-Troque o modelo a qualquer momento, sem reiniciar. Use Sonnet para casos
-simples, Opus para os complexos — você escolhe caso a caso.
+### Legal-source verification via web search
 
-### Sistema de verificação normativa via web search
+When the model cites a statute or binding precedent, it can consult
+official sources (planalto.gov.br, supreme-court websites) to confirm
+exact wording before drafting. Usage is frugal: at most 2-3 queries per
+ruling, only in cases of real doubt.
 
-Quando o modelo cita um dispositivo legal ou súmula, pode consultar a
-base oficial (planalto.gov.br, sites de tribunais superiores) para
-conferir a literalidade antes de escrever. O uso é parcimonioso: no
-máximo 2-3 consultas por sentença, apenas em casos de dúvida real.
+### Smart PDF pre-processing
 
-### Pré-processamento inteligente de PDFs
+SAJ court-case PDFs come bundled with side watermarks for electronic
+signature, headers, footers, and scanned pages without a text layer
+(which blocks keyword search). The program:
 
-Autos do SAJ vêm com tarja lateral de assinatura eletrônica, cabeçalhos
-e rodapés, e páginas escaneadas sem camada de texto (o que impede busca
-por termos). O programa:
+- **Crops** SAJ margins with calibrated measurements, removing noise
+  without losing content
+- **Detects** scanned pages automatically (analyzing the useful page
+  area, ignoring header and watermark)
+- **Applies OCR** in Portuguese (Tesseract) as an invisible text layer,
+  preserving the document's visual appearance
+- **Compresses** embedded images (JPEG quality 65, max 1400px), bringing
+  files down from tens to a few MB
 
-- **Recorta** as margens do SAJ com medidas calibradas, eliminando ruído
-  sem perder conteúdo
-- **Detecta** automaticamente páginas escaneadas (analisando o miolo
-  útil da página, ignorando cabeçalho e tarja)
-- **Aplica OCR** em português (Tesseract) com camada de texto invisível,
-  preservando a aparência visual do documento
-- **Comprime** imagens embutidas (JPEG qualidade 65, máximo 1400 px),
-  reduzindo o arquivo de dezenas para poucos MB
+### Customizable style
 
-### Estilo personalizável
+The `system prompt` — the file that defines how the judge writes — is an
+editable string in `app/cliente_api.py`. Tune it once, and it's applied
+to every ruling:
 
-O `system prompt` — o arquivo que define como o juiz redige — é uma
-string editável em `app/cliente_api.py`. Você ajusta uma vez e passa a
-ser replicado em toda sentença:
+- Report-opening conventions
+- Decision formatting
+- Legal-fee criteria
+- When to rule on summary judgment
+- Methodical skepticism toward evidence
 
-- Convenções de abertura do relatório
-- Formato do dispositivo
-- Critério de fixação de honorários
-- Quando julgar antecipadamente
-- Postura de desconfiança metódica quanto às provas
+### Per-case instructions
 
-### Instruções específicas por caso
+Before each generation, an editable field in the GUI lets you add
+case-specific notes: "watch for intercurrent prescription," "pending
+injunction request," "defendant in default," etc. A default checklist
+comes pre-filled — adapt or clear it.
 
-Antes de cada geração, um campo editável na GUI permite acrescentar
-peculiaridades: "atentar para prescrição intercorrente", "pedido de
-tutela pendente", "réu revel", etc. Um checklist padrão já vem
-preenchido — adapte ou apague.
+### Token efficiency
 
-### Economia de tokens
+Three architectural choices save tokens over naive alternatives:
 
-Três decisões de arquitetura preservam economia sobre alternativas
-ingênuas:
+- The PDF is sent **already cleaned** by the pre-processor (fewer pages,
+  no noise, fewer tokens)
+- The model returns the ruling in a **compact Python DSL** (`bp`, `cp`,
+  `sh`, `ch`, `cc`, `el`), not verbose OpenXML
+- **Legal formatting** is applied locally by the generator, not repeated
+  by the model in every paragraph
 
-- O PDF é enviado **já limpo** pelo pré-processador (menos páginas, sem
-  ruído, menos tokens)
-- O modelo retorna a sentença em **DSL Python compacto** (`bp`, `cp`,
-  `sh`, `ch`, `cc`, `el`), não em OpenXML verboso
-- A **formatação forense** é aplicada localmente pelo gerador, não
-  repetida pelo modelo em cada parágrafo
+### Cost transparency
 
-### Transparência de custo
+After each generation, the log displays:
 
-Após cada geração, o log exibe:
+- Input tokens consumed
+- Output tokens generated
+- Web search queries made (with the queries themselves)
+- **Estimated cost in USD** (calculated with Anthropic's official pricing)
 
-- Tokens de input consumidos
-- Tokens de output gerados
-- Consultas web_search realizadas (com as queries)
-- **Custo estimado em USD** (calculado com a tabela oficial da Anthropic)
+You know exactly how much each ruling cost before even opening the API
+console.
 
-Você sabe exatamente quanto custou cada sentença antes mesmo de olhar o
-console da API.
+### Security
 
-### Segurança
+- The API key is stored locally (`~/.sentenciador.json`) and never sent
+  to any server other than Anthropic
+- The generated `sentenca.py` file runs in a **sandbox** with restricted
+  `__builtins__` — no `import`, no `open()`, no filesystem access
+- Real case PDFs are excluded from the repository via `.gitignore`
 
-- A chave da API é armazenada localmente (`~/.sentenciador.json`) e
-  nunca enviada a nenhum servidor além da Anthropic
-- O arquivo `sentenca.py` gerado é executado em **sandbox** com
-  `__builtins__` restrito — sem `import`, sem `open()`, sem acesso a
-  sistema de arquivos
-- PDFs de casos reais ficam de fora do repositório pelo `.gitignore`
-
-## Instalação
+## Installation
 
 ### 1. Python 3.10+
 
-Se ainda não tiver:
+If you don't have it:
 
 ```powershell
 winget install Python.Python.3.12
 ```
 
-### 2. Tesseract OCR com português
+### 2. Tesseract OCR with Portuguese
 
-- Windows: https://github.com/UB-Mannheim/tesseract/wiki (marcar
-  idioma Portuguese durante o instalador)
+- Windows: https://github.com/UB-Mannheim/tesseract/wiki (check the
+  Portuguese option during install)
 - Linux: `sudo apt install tesseract-ocr tesseract-ocr-por`
 - macOS: `brew install tesseract tesseract-lang`
 
-### 3. Clonar e instalar
+### 3. Clone and install
 
 ```powershell
 git clone https://github.com/HalisonBruno/sentenciador.git
@@ -151,51 +150,51 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-### 4. Chave da API
+### 4. API key
 
-Obtenha em https://console.anthropic.com (adicione crédito em
-*Settings → Billing*; mínimo de US$ 5 para começar). A chave é
-independente da sua assinatura Claude Pro/Max.
+Get one at https://console.anthropic.com (add credit in *Settings →
+Billing*; minimum USD 5 to start). This API key is separate from any
+Claude Pro/Max subscription.
 
-## Uso
+## Usage
 
 ```powershell
 python app\gui.py
 ```
 
-Na primeira execução, cole a chave da API — ela fica salva para os
-próximos usos. Depois é só escolher o PDF dos autos, ajustar o prompt do
-caso se houver peculiaridade, e clicar em **▶ Gerar sentença**.
+On first run, paste the API key — it's saved for future sessions. Then
+pick the court-case PDF, adjust the case-specific prompt if needed, and
+click **▶ Gerar sentença** (Generate ruling).
 
-Três arquivos são criados ao lado do PDF original:
+Three files are created next to the original PDF:
 
-- `{nome}_limpo.pdf` — PDF pré-processado
-- `{nome}_sentenca.py` — código no DSL (útil para regenerar o `.docx`
-  ajustando parágrafos sem gastar API de novo)
-- `{nome}_sentenca.docx` — sentença final
+- `{name}_limpo.pdf` — pre-processed PDF
+- `{name}_sentenca.py` — DSL code (useful to regenerate the `.docx` with
+  tweaks, without spending API tokens again)
+- `{name}_sentenca.docx` — final ruling
 
-## Empacotamento como `.exe`
+## Building a Windows .exe
 
-Para distribuir como executável Windows:
+To distribute as a standalone Windows executable:
 
 ```powershell
 pip install pyinstaller
 pyinstaller --onefile --noconsole --name Sentenciador --collect-all anthropic --collect-all fitz app\gui.py
 ```
 
-O executável fica em `dist\Sentenciador.exe`. Crie um atalho na área de
-trabalho apontando para ele. O Tesseract precisa continuar instalado na
-máquina.
+The executable is generated at `dist\Sentenciador.exe`. Create a desktop
+shortcut pointing to it. Tesseract still needs to be installed on the
+machine.
 
-## Estrutura
+## Project structure
 
 ```
 sentenciador/
 ├── app/
-│   ├── gui.py            # Tkinter; orquestra o pipeline
-│   └── cliente_api.py    # SDK Anthropic + system prompt
+│   ├── gui.py            # Tkinter; orchestrates the pipeline
+│   └── cliente_api.py    # Anthropic SDK + system prompt
 ├── processador_pdf/
-│   └── processador.py    # OCR + recorte + compressão
+│   └── processador.py    # OCR + cropping + compression
 ├── gerador_docx/
 │   ├── dsl.py            # bp, cp, sh, ch, cc, el
 │   └── gerador.py        # sandbox + python-docx
@@ -205,20 +204,20 @@ sentenciador/
 └── README.md
 ```
 
-## Base técnica
+## Technical foundation
 
-Este projeto reúne, estende e integra via API Anthropic duas ferramentas
-anteriores do autor:
+This project gathers, extends, and integrates via Anthropic API two
+earlier tools by the author:
 
 - [processador-pdf-juridico](https://github.com/HalisonBruno/processador-pdf-juridico)
-  — recorte, OCR e compressão do PDF
+  — PDF cropping, OCR, and compression
 - [sentenca-docx](https://github.com/HalisonBruno/sentenca-docx) — DSL
-  para gerar `.docx` forense a partir de estrutura compacta
+  for generating court-ready `.docx` from compact structured input
 
-Enquanto as ferramentas anteriores exigiam três passos manuais e copy-
-paste com o Claude no meio, este programa elimina todo o atrito,
-trocando interação humana por custo de API controlado e transparente.
+While the earlier tools required three manual steps with copy-paste
+through Claude in between, this program eliminates all that friction,
+trading human interaction for controlled, transparent API cost.
 
-## Licença
+## License
 
 MIT
